@@ -70,6 +70,37 @@ func main() {
 }
 ```
 
+### Example 3: Serving Explanation in HTTP
+
+```go
+package main
+
+import (
+	"net/http"
+	"github.com/aristorap/explainable"
+)
+
+type Article struct {
+	Title   string `json:"title" explain:"Article title"`
+	Content string `json:"content" explain:"Main content"`
+	Author  string `json:"author" explain:"Author name"`
+}
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	data := Article{
+		Title:   "Using explainable in Go",
+		Content: "This article explains how to use the explainable package...",
+		Author:  "Jane Doe",
+	}
+	explainable.Respond(w, r, data)
+}
+
+func main() {
+	http.HandleFunc("/article", handler)
+	http.ListenAndServe(":8080", nil)
+}
+```
+
 ## Features
 
 - **Structs**: Describes the fields of the struct along with their JSON and explanation tags.
@@ -77,6 +108,7 @@ func main() {
 - **Pointers**: The package handles struct pointers, explaining their underlying values.
 - **Custom Tags**: Allows custom explanations via the `explain` tag, making it easy to provide context for each field.
 - **Recursion**: Nested structs are recursively explained to give a comprehensive view of the data structure.
+- **HTTP Response**: Provides a convenient `Respond` function to return either raw data or its explanation based on a query param (`?explain=true`).
 
 ## Tags
 
