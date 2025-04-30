@@ -5,6 +5,12 @@
     "fieldA": "abc",
     "fieldB": 123
   },
+  "nestedTwice": {
+    "fieldC": {
+      "fieldA": "xyz",
+      "fieldB": 999
+    }
+  },
   "pointer": {
     "fieldA": "xyz",
     "fieldB": 999

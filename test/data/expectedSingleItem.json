@@ -20,6 +20,24 @@
       }
     }
   },
+  "nestedTwice": {
+    "description": "Twice nested struct",
+    "fields": {
+      "fieldC": {
+        "description": "Explanation for field C",
+        "fields": {
+          "fieldA": {
+            "description": "Explanation for field A",
+            "type": "string"
+          },
+          "fieldB": {
+            "description": "Explanation for field B",
+            "type": "int"
+          }
+        }
+      }
+    }
+  },
   "pointer": {
     "description": "Pointer to nested",
     "fields": {

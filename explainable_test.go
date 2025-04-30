@@ -3,52 +3,25 @@ package explainable
 import (
 	"encoding/json"
 	"net/http/httptest"
-	"os"
 	"reflect"
 	"testing"
+
+	"github.com/aristorap/explainable/test"
 )
 
-type TestNested struct {
-	FieldA string `json:"fieldA" explain:"Explanation for field A"`
-	FieldB int    `json:"fieldB" explain:"Explanation for field B"`
-}
-
-type TestStruct struct {
-	SimpleField string       `json:"simpleField" explain:"A simple string field"`
-	NumberField int          `json:"numberField" explain:"A numeric field"`
-	Nested      TestNested   `json:"nested" explain:"Nested struct"`
-	Pointer     *TestNested  `json:"pointer" explain:"Pointer to nested"`
-	Slice       []TestNested `json:"slice" explain:"Slice of nested structs"`
-}
-
-// Function to load JSON data from a file into a Go structure
-func loadTestData(filename string, target interface{}) error {
-	data, err := os.ReadFile(filename)
+func TestExplainSingleItem(t *testing.T) {
+	// Load the test input and expected data
+	var input test.TestStructA
+	var expected map[string]any
+	err := test.SetupSingle(&input, &expected)
 	if err != nil {
-		return err
-	}
-	return json.Unmarshal(data, target)
-}
-
-func TestExplanation(t *testing.T) {
-	// Load the test input data from the testdata/input.json
-	var input TestStruct
-	err := loadTestData("testData/input.json", &input)
-	if err != nil {
-		t.Fatalf("Failed to load input data: %v", err)
-	}
-
-	// Load the expected output data from the testdata/expected.json
-	var expected map[string]interface{}
-	err = loadTestData("testData/expected.json", &expected)
-	if err != nil {
-		t.Fatalf("Failed to load expected data: %v", err)
+		t.Fatalf("Failed to setup data: %v", err)
 	}
 
 	// Call the function
 	result := Explain(input)
 
-	// Compare the result with the expected structure using reflect.DeepEqual
+	// Compare the result with the expected struct
 	if !reflect.DeepEqual(result, expected) {
 		t.Errorf("Expected result:\n%v\n but got:\n%v", expected, result)
 	}
@@ -58,6 +31,23 @@ func TestExplanation(t *testing.T) {
 		if _, ok := expected[key]; !ok {
 			t.Errorf("Unexpected key in result: %q with value %q", key, result[key])
 		}
+	}
+}
+func TestExplainListItem(t *testing.T) {
+	// Load the test input and expected data
+	var input []test.TestStructB
+	var expected map[string]any
+	err := test.SetupList(&input, &expected)
+	if err != nil {
+		t.Fatalf("Failed to setup data: %v", err)
+	}
+
+	// Call the function
+	result := Explain(input)
+
+	// Compare the result with the expected struct
+	if !reflect.DeepEqual(result, expected) {
+		t.Errorf("Expected result:\n%v\n but got:\n%v", expected, result)
 	}
 }
 
@@ -108,17 +98,17 @@ func TestRespondWithExplain(t *testing.T) {
 	resp := w.Result()
 	defer resp.Body.Close()
 
-	var parsed map[string]interface{}
+	var parsed map[string]any
 	if err := json.NewDecoder(resp.Body).Decode(&parsed); err != nil {
 		t.Fatalf("failed to decode response: %v", err)
 	}
 
-	data, ok := parsed["data"].(map[string]interface{})
+	data, ok := parsed["data"].(map[string]any)
 	if !ok {
 		t.Fatalf("expected 'data' field in response")
 	}
-	nameField := data["name"].(map[string]interface{})
-	emailField := data["email"].(map[string]interface{})
+	nameField := data["name"].(map[string]any)
+	emailField := data["email"].(map[string]any)
 
 	if nameField["description"] != "The name of the user" {
 		t.Errorf("expected description for 'name', got %v", nameField["description"])
