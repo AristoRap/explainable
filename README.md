@@ -1,5 +1,25 @@
 # explainable
 
+<p align="center">
+  <img src="logo.png" width="150" alt="Explainable Logo">
+</p>
+
+<h1 align="center">explainable</h1>
+
+<p align="center">
+  A reflection-based utility to describe Go structs and slices using metadata.
+</p>
+
+<p align="center">
+  <a href="https://pkg.go.dev/github.com/aristorap/explainable"><img src="https://pkg.go.dev/badge/github.com/aristorap/explainable.svg" alt="Go Reference"></a>
+  <a href="https://goreportcard.com/report/github.com/aristorap/explainable"><img src="https://goreportcard.com/badge/github.com/aristorap/explainable" alt="Go Report Card"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+  <a href="https://github.com/aristorap/explainable/actions/workflows/go.yml"><img src="https://github.com/aristorap/explainable/actions/workflows/go.yml/badge.svg" alt="Test"></a>
+  <!-- <a href="https://codecov.io/gh/aristorap/explainable"><img src="https://codecov.io/gh/aristorap/explainable/branch/main/graph/badge.svg" alt="codecov"></a> -->
+</p>
+
+---
+
 `explainable` is a Go package that helps describe structs and their fields with metadata. It uses reflection to provide an easy-to-understand explanation of the structure of structs, slices, and other types in your Go code.
 
 The package automatically generates a description for each field, allowing developers to understand the structure and metadata associated with the fields of their Go types.
