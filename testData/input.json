@@ -1,0 +1,16 @@
+{
+  "simpleField": "hello",
+  "numberField": 42,
+  "nested": {
+    "fieldA": "abc",
+    "fieldB": 123
+  },
+  "pointer": {
+    "fieldA": "xyz",
+    "fieldB": 999
+  },
+  "slice": [
+    { "fieldA": "one", "fieldB": 1 },
+    { "fieldA": "two", "fieldB": 2 }
+  ]
+}

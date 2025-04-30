@@ -1,0 +1,51 @@
+{
+  "simpleField": {
+    "description": "A simple string field",
+    "type": "string"
+  },
+  "numberField": {
+    "description": "A numeric field",
+    "type": "int"
+  },
+  "nested": {
+    "description": "Nested struct",
+    "fields": {
+      "fieldA": {
+        "description": "Explanation for field A",
+        "type": "string"
+      },
+      "fieldB": {
+        "description": "Explanation for field B",
+        "type": "int"
+      }
+    }
+  },
+  "pointer": {
+    "description": "Pointer to nested",
+    "fields": {
+      "fieldA": {
+        "description": "Explanation for field A",
+        "type": "string"
+      },
+      "fieldB": {
+        "description": "Explanation for field B",
+        "type": "int"
+      }
+    }
+  },
+  "slice": {
+    "description": "Slice of nested structs",
+    "items": [
+      {
+        "fieldA": {
+          "description": "Explanation for field A",
+          "type": "string"
+        },
+        "fieldB": {
+          "description": "Explanation for field B",
+          "type": "int"
+        }
+      }
+    ]
+  }
+}
