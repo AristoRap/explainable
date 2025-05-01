@@ -1,0 +1,48 @@
+name: Auto Patch Tag for Doc/Test Changes
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "README.md"
+      - "test/**"
+      - ".github/workflows/auto-patch-tag.yaml"
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Git
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+      - name: Get latest tag and bump patch
+        id: version
+        run: |
+          latest=$(git describe --tags --abbrev=0 2>/dev/null || echo v0.0.0)
+          echo "Latest tag: $latest"
+
+          version=${latest#v}
+          IFS='.' read -r major minor patch <<< "$version"
+          patch=$((patch + 1))
+          new_tag="v$major.$minor.$patch"
+          echo "new_tag=$new_tag" >> $GITHUB_OUTPUT
+
+      - name: Ensure clean working tree
+        run: |
+          if ! git diff-index --quiet HEAD --; then
+            echo "Working tree is dirty. Aborting."
+            exit 1
+          fi
+
+      - name: Create new tag
+        run: |
+          git tag ${{ steps.version.outputs.new_tag }}
+          git push origin ${{ steps.version.outputs.new_tag }}
