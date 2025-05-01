@@ -178,17 +178,17 @@ func main() {
 ```JSON
 {
   "data":{
-    "author":{
-      "description":"Author name",
-      "type":"string"
+    "author": {
+      "description": "Author name",
+      "type": "string"
     },
-    "content":{
-      "description":"Main content",
-      "type":"string"
+    "content": {
+      "description": "Main content",
+      "type": "string"
     },
-    "title":{
-      "description":"Article title",
-      "type":"string"
+    "title": {
+      "description": "Article title",
+      "type": "string"
     }
   }
 }
