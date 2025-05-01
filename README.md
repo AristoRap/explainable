@@ -1,7 +1,7 @@
 # explainable
 
 <p align="center">
-  <img src="logo.png" width="150" alt="Explainable Logo">
+  <img src="logo.png" width="250px" alt="Explainable Logo">
 </p>
 
 <h1 align="center">explainable</h1>
