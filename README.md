@@ -59,7 +59,25 @@ func main() {
 
 	// Get the explanation of the User struct
 	explanation := explainable.Explain(user)
-	fmt.Printf("%+v", explanation)  // Print the explanation
+	fmt.Printf("%+v", explanation)
+```
+
+#### Example 1: Response (Marshalled to JSON)
+
+```JSON
+{
+  "email": {
+    "description": "The email address",
+    "type": "string"
+  },
+  "id": {
+    "description": "The unique identifier",
+    "type": "int"
+  },
+  "name": {
+    "description": "The name of the user",
+    "type": "string"
+  }
 }
 ```
 
@@ -86,7 +104,27 @@ func main() {
 
 	// Get the explanation of the slice of Products
 	explanation := explainable.Explain(products)
-	fmt.Printf("%+v", explanation)  // Print the explanation
+	fmt.Printf("%+v", explanation)
+}
+```
+
+#### Example 2: Response (Marshalled to JSON)
+
+```JSON
+{
+  "description": "List of results",
+  "results": [
+    {
+      "id": {
+        "description": "Product identifier",
+        "type": "int"
+      },
+      "name": {
+        "description": "Product name",
+        "type": "string"
+      }
+    }
+  ]
 }
 ```
 
@@ -112,12 +150,47 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		Content: "This article explains how to use the explainable package...",
 		Author:  "Jane Doe",
 	}
+
+  // If params include 'explain=true'
+  // Respond will send over the explained data
+  // Else it will respond with the data
 	explainable.Respond(w, r, data)
 }
 
 func main() {
 	http.HandleFunc("/article", handler)
 	http.ListenAndServe(":8080", nil)
+}
+```
+
+#### Example 3.1: GET /article
+
+```JSON
+{
+  "title":"Using explainable in Go",
+  "content":"This article explains how to use the explainable package...",
+  "author":"Jane Doe"
+}
+```
+
+#### Example 3.2: GET /article?explain=true
+
+```JSON
+{
+  "data":{
+    "author":{
+      "description":"Author name",
+      "type":"string"
+    },
+    "content":{
+      "description":"Main content",
+      "type":"string"
+    },
+    "title":{
+      "description":"Article title",
+      "type":"string"
+    }
+  }
 }
 ```
 
