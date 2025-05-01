@@ -24,6 +24,32 @@
 
 The package automatically generates a description for each field, allowing developers to understand the structure and metadata associated with the fields of their Go types.
 
+## Features
+
+- **Structs**: Describes the fields of the struct along with their JSON and explanation tags.
+- **Slices**: Describes slices and their elements. If the elements are structs, a representative element is explained.
+- **Pointers**: The package handles struct pointers, explaining their underlying values.
+- **Custom Tags**: Allows custom explanations via the `explain` tag, making it easy to provide context for each field.
+- **Recursion**: Nested structs are recursively explained to give a comprehensive view of the data structure.
+- **HTTP Response**: Provides a convenient `Respond` function to return either raw data or its explanation based on a query param (`?explain=true`).
+
+## Tags
+
+The package relies on the following tags:
+
+- `json`: Used to indicate the JSON field name.
+- `explain`: Used to provide a description of the field.
+
+### Example of Tags
+
+```go
+type Example struct {
+	Field1 string `json:"field1" explain:"First field description"`
+	Field2 int    `json:"field2" explain:"Second field description"`
+}
+```
+
+
 ## Installation
 
 To install the `explainable` package, run the following Go command:
@@ -191,31 +217,6 @@ func main() {
       "type": "string"
     }
   }
-}
-```
-
-## Features
-
-- **Structs**: Describes the fields of the struct along with their JSON and explanation tags.
-- **Slices**: Describes slices and their elements. If the elements are structs, a representative element is explained.
-- **Pointers**: The package handles struct pointers, explaining their underlying values.
-- **Custom Tags**: Allows custom explanations via the `explain` tag, making it easy to provide context for each field.
-- **Recursion**: Nested structs are recursively explained to give a comprehensive view of the data structure.
-- **HTTP Response**: Provides a convenient `Respond` function to return either raw data or its explanation based on a query param (`?explain=true`).
-
-## Tags
-
-The package relies on the following tags:
-
-- `json`: Used to indicate the JSON field name.
-- `explain`: Used to provide a description of the field.
-
-### Example of Tags
-
-```go
-type Example struct {
-	Field1 string `json:"field1" explain:"First field description"`
-	Field2 int    `json:"field2" explain:"Second field description"`
 }
 ```
 
