@@ -12,7 +12,7 @@
 
 <p align="center">
   <a href="https://github.com/aristorap/explainable/tags"><img src="https://img.shields.io/github/v/tag/aristorap/explainable?label=version&sort=semver" alt="Version"></a>
-  <a href="https://github.com/aristorap/explainable/actions/workflows/go.yml"><img src="https://github.com/aristorap/explainable/actions/workflows/ci.yml/badge.svg" alt="Test"></a>
+  <a href="https://github.com/aristorap/explainable/actions/workflows/ci.yml"><img src="https://github.com/aristorap/explainable/actions/workflows/ci.yml/badge.svg" alt="Test"></a>
   <a href="https://goreportcard.com/report/github.com/aristorap/explainable"><img src="https://goreportcard.com/badge/github.com/aristorap/explainable" alt="Go Report Card"></a>
   <a href="https://pkg.go.dev/github.com/aristorap/explainable"><img src="https://pkg.go.dev/badge/github.com/aristorap/explainable.svg" alt="Go Reference"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
