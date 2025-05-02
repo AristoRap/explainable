@@ -1,10 +1,6 @@
-# explainable
-
 <p align="center">
   <img src="logo.png" width="250px" alt="Explainable Logo">
 </p>
-
-<h1 align="center">explainable</h1>
 
 <p align="center">
   A reflection-based utility to describe Go structs and slices using metadata.
